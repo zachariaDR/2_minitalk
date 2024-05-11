@@ -6,7 +6,7 @@
 /*   By: zadriouc <zadriouc@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 17:47:58 by zadriouc          #+#    #+#             */
-/*   Updated: 2024/05/11 13:57:41 by zadriouc         ###   ########.fr       */
+/*   Updated: 2024/05/11 14:30:55 by zadriouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void		ft_increment(int *a, int *b);
 void		ft_allocate(char **str, int size, int *help);
 void		mini_banner(int s_pid, int nb, int op);
 int			bytes_nb(char c);
+void		ft_print_binary(char c);
 #endif
