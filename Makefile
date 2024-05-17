@@ -5,15 +5,15 @@ CLIENT	=	client
 SERVER	=	server
 
 #ft_printf Variables:
-LIBFTPRINTF	=	ft_printf/libftprintf.a
-LIBFTPRINTF_DIR	=	ft_printf
+LIBFTPRINTF	=	lib/libftprintf.a
+LIBFTPRINTF_DIR	=	lib
 
 #minitalk variables
 SRC_C	=	ft_client.c
 SRC_S	=	ft_server.c
 OBJ_S	=	ft_server.o
 OBJ_C	=	ft_client.o
-INC		=	ft_minitalk.h
+INC		=	lib/minitalk_tools/minitalk_tools.h
 
 #Compiling Variables:
 CC			=	gcc

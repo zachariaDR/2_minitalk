@@ -6,37 +6,19 @@
 /*   By: zadriouc <zadriouc@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 18:32:02 by zadriouc          #+#    #+#             */
-/*   Updated: 2024/05/11 13:53:00 by zadriouc         ###   ########.fr       */
+/*   Updated: 2024/05/13 11:25:59 by zadriouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/minitalk_tools/minitalk_tools.h"
+#include "lib/minitalk_tools/minitalk_tools.h"
 
 void	build_str(t_var *v, int *client_pid)
 {
-	// if (v->recieved == 8)
-	// 	mini_banner(0, 0, 2);
-	if (bytes_nb(v->c) == 0 || bytes_nb(v->c) > 1)
-	{
-		if (bytes_nb(v->c) != 0)
-		{
-			v->buffer_need = bytes_nb(v->c);
-			ft_allocate(&(v->s), bytes_nb(v->c) + 1, NULL);
-			v->i = 0;
-		}
-		if (v->i < v->buffer_need)
-		{
-			v->s[v->i] = v->c;
-			v->i = v->i + 1;
-		}
-		if (v->i == v->buffer_need)
-		{
-			v->s[v->i] = '\0';
-			ft_printf("%s", v->s);
-			free(v->s);
-		}
-	}
-	if (bytes_nb(v->c) == 1)
+	if (v->recieved == 8)
+		mini_banner(0, 0, 2);
+	if (is_unicode(v->c))
+		ft_hundle_unicode(v->c, &(v->s), &(v->i), &(v->buffer_need));
+	if (is_ascii(v->c))
 		ft_printf("%c", v->c);
 	(v->str)[v->index] = v->c;
 	if (v->c == '\0')
@@ -91,7 +73,8 @@ void	action(int sig, siginfo_t *info, void *context)
 		ft_allocate(&(v.str), v.size_str, &help);
 	if (client_pid != current_pid)
 		re_initialase(&v, &client_pid, &current_pid, &help);
-	(build_character(&(v.c), sig), ft_increment(&(v.recieved), &(v.bit)));
+	build_character(&(v.c), sig);
+	ft_increment(&(v.recieved), &(v.bit));
 	if (v.bit == 8)
 	{
 		if (help == 0)
@@ -100,9 +83,8 @@ void	action(int sig, siginfo_t *info, void *context)
 			build_str(&v, &client_pid);
 	}
 	v.c <<= 1;
-	usleep(120);
-	if (kill(client_pid, SIGUSR2) == -1)
-		signal_error(1);
+	usleep(133);
+	kill(client_pid, SIGUSR2);
 }
 
 int	main(void)

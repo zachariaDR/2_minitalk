@@ -6,11 +6,11 @@
 /*   By: zadriouc <zadriouc@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:45:18 by zadriouc          #+#    #+#             */
-/*   Updated: 2024/05/08 14:52:00 by zadriouc         ###   ########.fr       */
+/*   Updated: 2024/05/13 11:25:52 by zadriouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/minitalk_tools/minitalk_tools.h"
+#include "lib/minitalk_tools/minitalk_tools.h"
 
 void	char_to_bin(unsigned char c, int pid)
 {
@@ -32,7 +32,7 @@ void	char_to_bin(unsigned char c, int pid)
 		c <<= 1;
 		bit++;
 		pause();
-		usleep(120);
+		usleep(133);
 	}
 }
 
@@ -55,7 +55,7 @@ void	recieved(int sig)
 		order = 1;
 	else if (sig == SIGUSR1 && order == 1)
 	{
-		ft_printf("\n-- %d signal sent successfully! ✅ --\n", sent);
+		ft_printf("\n-- %d signal sent successfully! ✅ --\n\n", sent);
 		exit(EXIT_SUCCESS);
 	}
 	if (sig == SIGUSR2 && order == 1)
